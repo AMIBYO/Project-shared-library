@@ -9,7 +9,9 @@ def call(Map stageParams) {
          
     ])
         git url:  stageParams.url
-
+   stage("clean") {
+            bat "mvn clean"
+        }
         stage("Compile") {
             bat "mvn compile"
         }
@@ -23,6 +25,8 @@ def call(Map stageParams) {
               stage("package") {
             bat "mvn package"
         }
- 
+   stage("package") {
+            echo "mvn package"
+        }
     }
   }
