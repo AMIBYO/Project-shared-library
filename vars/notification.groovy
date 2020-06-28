@@ -1,5 +1,5 @@
 import org.example.Constants
-
+stage("Compile") {
 def call(Map config=[:]) {
     if (config.type == "slack") {
         echo Constants.SLACK_MESSAGE
@@ -8,4 +8,5 @@ def call(Map config=[:]) {
         echo Constants.EMAIL_MESSAGE
         echo config.message
     }
+}
 }
