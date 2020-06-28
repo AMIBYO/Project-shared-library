@@ -25,7 +25,7 @@ def call(Map stageParams) {
               stage("package") {
             bat "mvn package"
         }
-   stage("deploy") {
+      stage("deploy") {
             echo "mvn deploy"
         }
     }
