@@ -1,7 +1,7 @@
 import org.example.Constants
 
 def call(Map config=[:]) {
-    stage("Compile") {
+        stage("Noification") {
     if (config.type == "slack") {
         echo Constants.SLACK_MESSAGE
         echo config.message
