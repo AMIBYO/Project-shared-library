@@ -8,6 +8,12 @@ def call(Map stageParams) {
          
     ])
        node {
+                 checkout([
+        $class: 'GitSCM',
+        branches: [[name:  stageParams.branch ]],
+        userRemoteConfigs: [[ url: stageParams.url ]]
+         
+    ])
         git url:  stageParams.url
 
         stage("Compile") {
