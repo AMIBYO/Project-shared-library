@@ -1,21 +1,28 @@
-def call(Map config=[:], Closure body) {
-    node {
-        git url: "https://github.com/werne2j/sample-nodejs"
+def call(Map stageParams) {
 
-        stage("Install") {
-            sh "npm install"
+        
+    checkout([
+        $class: 'GitSCM',
+        branches: [[name:  stageParams.branch ]],
+        userRemoteConfigs: [[ url: stageParams.url ]]
+         
+    ])
+     node {
+        git url:  stageParams.url
+
+        stage("Compile") {
+            bat "mvn compile"
         }
 
         stage("Test") {
-            sh "npm test"
+            bat "mvn test"
         }
-
-        stage("Deploy") {
-            if (config.deploy) {
-                sh "npm publish"
-            }
+        stage("install") {
+            bat "mvn install"
         }
-
-        body()
+              stage("package") {
+            bat "mvn package"
+        }
+ 
     }
-}
+  }
